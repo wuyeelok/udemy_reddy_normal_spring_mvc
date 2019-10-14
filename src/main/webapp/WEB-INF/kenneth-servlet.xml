@@ -5,6 +5,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
                 http://www.springframework.org/schema/beans     
                 http://www.springframework.org/schema/beans/spring-beans.xsd     
@@ -13,7 +14,9 @@
                 http://www.springframework.org/schema/mvc         
                 http://www.springframework.org/schema/mvc/spring-mvc.xsd 
                 http://www.springframework.org/schema/util     
-                http://www.springframework.org/schema/util/spring-util.xsd">
+                http://www.springframework.org/schema/util/spring-util.xsd
+                http://www.springframework.org/schema/tx         
+                http://www.springframework.org/schema/tx/spring-tx.xsd ">
 
 	<!-- Step 3: Add support for component scanning -->
 	<context:component-scan
@@ -29,5 +32,46 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+
+	<!-- Step 9: Define datasource -->
+	<bean id="myDataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/kenneth_alien?useSSL=false&amp;serverTimezone=UTC"></property>
+		<property name="user" value="kenken"></property>
+		<property name="password" value="12345678"></property>
+
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="10" />
+		<property name="maxIdleTime" value="30000" />
+	</bean>
+
+	<!-- Step 8: Define session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="packagesToScan"
+			value="com.kenneth.springmvc.model" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- Step 7: Define transaction manager -->
+	<bean id="myTransactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+	<!-- Step 6: Add support for annotation transaction -->
+	<tx:annotation-driven
+		transaction-manager="myTransactionManager" />
 
 </beans>
