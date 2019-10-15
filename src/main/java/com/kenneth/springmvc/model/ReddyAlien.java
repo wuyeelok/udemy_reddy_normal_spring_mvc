@@ -1,7 +1,14 @@
 package com.kenneth.springmvc.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "reddyalien")
 public class ReddyAlien implements Alien {
 
+	@Id
 	private int aid;
 	private String aname;
 

@@ -4,11 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to Kenneth</title>
+<title>Get Aliens</title>
 </head>
 <body>
-	<p>Result is: ${a1}</p>
-	
-	<p>Welcome ${name}</p>
+
+	<p>${result}</p>
+
+	<p>${alien_length}</p>
+
 </body>
 </html>
