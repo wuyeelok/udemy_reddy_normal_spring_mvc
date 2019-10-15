@@ -8,4 +8,6 @@ public interface AlienDao {
 
 	public List<Alien> getAliens();
 
+	public void add(Alien alien);
+
 }

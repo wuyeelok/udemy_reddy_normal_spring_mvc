@@ -51,4 +51,16 @@ public class ReddyAlienDao implements AlienDao {
 
 	}
 
+	@Override
+	@Transactional
+	public void add(Alien alien) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+
+		// ReddyAlien rAlien = new ReddyAlien(alien.getAid(), alien.getAname());
+
+		session.save(alien);
+
+	}
+
 }
