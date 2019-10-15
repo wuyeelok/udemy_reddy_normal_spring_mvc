@@ -10,4 +10,6 @@ public interface AlienDao {
 
 	public void add(Alien alien);
 
+	public Alien getAlien(int aid);
+
 }

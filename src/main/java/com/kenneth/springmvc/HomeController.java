@@ -98,4 +98,14 @@ public class HomeController {
 
 		return "showAliens";
 	}
+
+	@GetMapping("getAlien")
+	public String getAlien(@RequestParam("alienid") int aid, Model m) {
+
+		Alien a = this.dao.getAlien(aid);
+
+		m.addAttribute("a1", a);
+
+		return "result";
+	}
 }

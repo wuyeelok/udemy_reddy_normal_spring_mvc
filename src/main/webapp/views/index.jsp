@@ -15,5 +15,11 @@
 			your name : </label> <input type="text" name="aname" id="aname" required /><br>
 		<input type="submit" value="Submit Form" />
 	</form>
+	<hr>
+	<form action="getAlien" method="get">
+		<label for="alienid">Enter alien id: </label> <input type="number"
+			id="alienid" name="alienid"> <br> <input type="submit"
+			value="Submit Form" />
+	</form>
 </body>
 </html>
